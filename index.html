@@ -353,7 +353,7 @@
       z-index: 1;
     }
 
-    /* circular arc glow below mockup — brand blue */
+    /* 3D sphere behind mockup — glassy brand-blue orb */
     .hero-mockup::before {
       content: '';
       position: absolute;
@@ -363,10 +363,36 @@
       width: 900px;
       height: 900px;
       border-radius: 50%;
-      background: transparent;
+      background:
+        radial-gradient(circle at 32% 26%,
+          rgba(255,255,255,0.95) 0%,
+          #DCEEFB 10%,
+          #A7CDF0 28%,
+          #5E94D9 52%,
+          #2E6BE6 72%,
+          #1F3F86 92%,
+          #0F1F48 100%);
       box-shadow:
-        0 0 120px 60px rgba(67,190,232,0.16),
-        0 0 60px 20px rgba(212,144,32,0.10);
+        inset -50px -60px 120px rgba(15,31,72,0.55),
+        inset 40px 50px 80px rgba(255,255,255,0.35),
+        0 80px 120px -20px rgba(46,107,230,0.45),
+        0 40px 80px rgba(15,27,46,0.25);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* specular highlight on the sphere */
+    .hero-mockup::after {
+      content: '';
+      position: absolute;
+      bottom: 380px;
+      left: calc(50% - 230px);
+      width: 220px;
+      height: 110px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.25) 45%, transparent 75%);
+      transform: rotate(-20deg);
+      filter: blur(8px);
       pointer-events: none;
       z-index: 0;
     }
