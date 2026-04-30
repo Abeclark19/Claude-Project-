@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crew Automate.AI — Clarity for better decision-making</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* ── Crew Automate.AI Brand Palette (Light / Market-Friendly) ── */
+      --black:        #F7F8FB;   /* page bg — soft off-white */
+      --black-2:      #FFFFFF;   /* cards / elevated surfaces */
+      --blue:         #2E6BE6;   /* primary — confident corporate blue */
+      --blue-light:   #5E8BF0;
+      --blue-100:     #E4ECFC;
+      --mid-blue:     #1F4FB8;
+      --teal:         #3B7FD9;
+      --orange:       #FF6B4A;   /* friendly coral accent */
+      --orange-light: #FF8E73;
+      --dark-grey:    #E4E7EE;   /* subtle dividers / muted surfaces */
+      --white:        #EAF0F8;   /* text — nearly white */
+      --neutral:      #EAF0F8;   /* secondary text — nearly white */
+      /* legacy aliases so nothing breaks */
+      --purple:       #2E6BE6;
+      --purple-light: #5E8BF0;
+      --purple-100:   #E4ECFC;
+      --green:        #FF6B4A;
+      --green-light:  #FFE2D9;
+      --green-200:    #FFB9A3;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+    body {
+      background-color: #050816;
+      color: var(--white);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      letter-spacing: 0.3px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, .font-mono {
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ─── LAYOUT ─── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+      text-decoration: none;
+    }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn:focus-visible { outline: 2px solid var(--purple); outline-offset: 3px; }
+
+    .btn-purple {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--teal) 100%);
+      color: #EAF0F8;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      box-shadow: 0 0 24px rgba(67,190,232,0.35), 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .btn-purple:hover {
+      box-shadow: 0 0 40px rgba(67,190,232,0.5), 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .btn-green  {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+      color: #EAF0F8;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      box-shadow: 0 0 24px rgba(212,144,32,0.35), 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .btn-green:hover {
+      box-shadow: 0 0 40px rgba(212,144,32,0.5), 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(67,190,232,0.35);
+      font-family: 'Roboto Mono', monospace;
+    }
+    .btn-outline:hover { border-color: rgba(67,190,232,0.7); color: var(--blue); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(5,8,22,0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0,229,255,0.30);
+      box-shadow: 0 4px 30px rgba(0,229,255,0.18), inset 0 -1px 0 rgba(0,229,255,0.10);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #EAF0F8;
+    }
+    .nav-logo-icon {
+      width: 32px; height: 32px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .nav-logo-icon img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .nav-tag {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      padding: 5px 16px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: #EAF0F8;
+      white-space: nowrap;
+    }
+    .nav-tag span { color: #EAF0F8; }
+
+    .nav-menu { position: relative; }
+    .nav-menu-btn {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .nav-menu-btn:hover { background: rgba(255,255,255,0.25); }
+    .nav-menu-btn span {
+      display: block;
+      width: 16px; height: 1.5px;
+      background: #FFFFFF;
+      border-radius: 2px;
+    }
+    .nav-menu-dropdown {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      min-width: 180px;
+      background: #0F1729;
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,229,255,0.20), 0 2px 6px rgba(0,0,0,0.5);
+      padding: 8px;
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 200;
+    }
+    .nav-menu.open .nav-menu-dropdown { display: flex; }
+    .nav-menu-item {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #EAF0F8;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      text-decoration: none;
+    }
+    .nav-menu-item:hover { background: rgba(0,229,255,0.12); color: #4DEFFF; }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 160px 40px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: #050816; /* dark deep space */
+    }
+
+    /* Aurora canvas — disabled in bright theme to keep hero clean */
+    #aurora-canvas {
+      display: none;
+    }
+
+    /* Push all direct hero children above the canvas */
+    .hero > *:not(#aurora-canvas) {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Luminous dark sphere — bright cyan core fading to near-black */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1200px;
+      height: 1200px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 45%,
+          rgba(160,240,255,0.55) 0%,
+          rgba(0,229,255,0.40) 8%,
+          rgba(0,140,200,0.22) 22%,
+          rgba(15,40,90,0.55) 45%,
+          rgba(6,14,36,0.92) 70%,
+          #02050E 92%,
+          #000308 100%);
+      box-shadow:
+        inset -40px -60px 160px rgba(0,0,0,0.85),
+        inset 30px 40px 110px rgba(0,229,255,0.18),
+        0 0 60px rgba(0,229,255,0.50),
+        0 0 160px rgba(0,229,255,0.30),
+        0 60px 140px rgba(46,107,230,0.30);
+      pointer-events: none;
+      z-index: 0;
+      animation: spherePulse 6s ease-in-out infinite;
+    }
+    @keyframes spherePulse {
+      0%, 100% {
+        box-shadow:
+          inset -40px -60px 160px rgba(0,0,0,0.85),
+          inset 30px 40px 110px rgba(0,229,255,0.18),
+          0 0 60px rgba(0,229,255,0.50),
+          0 0 160px rgba(0,229,255,0.30),
+          0 60px 140px rgba(46,107,230,0.30);
+      }
+      50% {
+        box-shadow:
+          inset -40px -60px 160px rgba(0,0,0,0.85),
+          inset 30px 40px 110px rgba(0,229,255,0.28),
+          0 0 90px rgba(0,229,255,0.65),
+          0 0 220px rgba(0,229,255,0.40),
+          0 60px 140px rgba(46,107,230,0.40);
+      }
+    }
+
+    /* soft cyan inner shimmer */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1200px;
+      height: 1200px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 32% 30%, rgba(180,240,255,0.30) 0%, rgba(180,240,255,0.10) 18%, transparent 38%),
+        radial-gradient(circle at 50% 60%, rgba(0,229,255,0.10) 0%, transparent 50%);
+      mix-blend-mode: screen;
+      filter: blur(2px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: #EAF0F8;
+      max-width: 540px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-sub strong { color: var(--white); }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.82rem;
+      color: #EAF0F8;
+    }
+    .hero-trust span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-trust svg { color: var(--green); }
+
+    /* ─── TRUST SIGNALS ─── */
+    .trust-bar {
+      margin: 48px auto 0;
+      max-width: 960px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .trust-stars-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+      font-size: 0.9rem;
+      color: var(--neutral);
+    }
+    .trust-stars {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .trust-stars svg { color: #F5B400; width: 18px; height: 18px; }
+    .trust-stars-text strong { color: var(--white); font-weight: 700; }
+    .trust-divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(15,27,46,0.18);
+    }
+    .trust-avatars {
+      display: flex;
+      align-items: center;
+    }
+    .trust-avatars img, .trust-avatars .trust-avatar-ph {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--black);
+      margin-left: -8px;
+      background: linear-gradient(135deg, var(--blue), var(--mid-blue));
+      display: block;
+    }
+    .trust-avatars img:first-child, .trust-avatars .trust-avatar-ph:first-child { margin-left: 0; }
+    .trust-logos-label {
+      text-align: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--neutral);
+      margin-bottom: 18px;
+    }
+    .trust-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      opacity: 0.7;
+    }
+    .trust-logo {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s ease;
+    }
+    .trust-logo:hover { opacity: 0.6; }
+    .trust-logo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+    .trust-logo.alt .trust-logo-dot { background: var(--blue-light); border-radius: 2px; }
+    .trust-logo.alt2 .trust-logo-dot { background: var(--mid-blue); transform: rotate(45deg); border-radius: 1px; }
+
+    /* ─── DASHBOARD MOCKUP ─── */
+    .hero-mockup {
+      margin: 60px auto 0;
+      max-width: 860px;
+      position: relative;
+      z-index: 1;
+    }
+
+
+    .mockup-browser {
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.18);
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.4),
+        0 24px 60px rgba(46,107,230,0.18),
+        0 40px 100px rgba(0,0,0,0.35);
+    }
+
+    .mockup-titlebar {
+      background: rgba(255,255,255,0.06);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .mockup-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .mockup-dot:nth-child(1) { background: #ff5f57; }
+    .mockup-dot:nth-child(2) { background: #febc2e; }
+    .mockup-dot:nth-child(3) { background: #28c840; }
+
+    .mockup-body {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      min-height: 340px;
+    }
+
+    .mockup-sidebar {
+      background: rgba(255,255,255,0.04);
+      padding: 16px 12px;
+      border-right: 1px solid rgba(255,255,255,0.10);
+    }
+    .mockup-sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 20px;
+      padding: 0 4px;
+    }
+    .mockup-sidebar-logo-icon {
+      width: 20px; height: 20px;
+      border-radius: 4px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .mockup-sidebar-logo-icon img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mockup-sidebar-logo span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .mockup-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 8px;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      color: #EAF0F8;
+      margin-bottom: 2px;
+      cursor: pointer;
+    }
+    .mockup-nav-item.active {
+      background: rgba(67,190,232,0.2);
+      color: var(--white);
+    }
+    .mockup-nav-item-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    .mockup-content {
+      padding: 16px;
+      background: transparent;
+    }
+
+    .mockup-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .mockup-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #EAF0F8;
+    }
+    .mockup-badge {
+      font-size: 0.6rem;
+      background: rgba(61,253,152,0.15);
+      color: var(--green);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(61,253,152,0.3);
+    }
+
+    .mockup-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .mockup-stat-card {
+      background: rgba(67,190,232,0.12);
+      border: 1px solid rgba(67,190,232,0.2);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .mockup-stat-label {
+      font-size: 0.58rem;
+      color: #EAF0F8;
+      margin-bottom: 4px;
+    }
+    .mockup-stat-value {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .mockup-stat-value.green { color: var(--green); }
+    .mockup-stat-sub {
+      font-size: 0.58rem;
+      color: #EAF0F8;
+      margin-top: 2px;
+    }
+
+    /* Mini chart bars */
+    .mockup-chart {
+      background: rgba(67,190,232,0.08);
+      border: 1px solid rgba(67,190,232,0.15);
+      border-radius: 8px;
+      padding: 10px;
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mockup-chart-label {
+      font-size: 0.6rem;
+      color: #EAF0F8;
+      margin-bottom: 8px;
+    }
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 80px;
+    }
+    .chart-bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      background: rgba(67,190,232,0.5);
+      min-width: 0;
+    }
+    .chart-bar.active { background: var(--purple); }
+    .chart-line-overlay {
+      position: absolute;
+      bottom: 20px; left: 10px; right: 10px;
+      height: 40px;
+    }
+    .chart-line-overlay svg { width: 100%; height: 100%; }
+
+    .mockup-table {
+      margin-top: 10px;
+    }
+    .mockup-table-row {
+      display: grid;
+      grid-template-columns: 1fr 60px 60px 70px;
+      gap: 8px;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(15,27,46,0.05);
+      font-size: 0.6rem;
+      color: #EAF0F8;
+      align-items: center;
+    }
+    .mockup-table-row.header { color: #EAF0F8; font-weight: 600; }
+    .mockup-table-row .val { text-align: right; }
+    .mockup-table-row .green-val { color: var(--green); text-align: right; }
+    .mockup-table-row .name { color: #EAF0F8; }
+
+    /* ─── SECTION: MAKE BETTER DECISIONS ─── */
+    .section-intro {
+      padding: 100px 40px;
+      background: #0A1228; /* deep tech */
+    }
+    .section-intro .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .section-intro-headline {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    .section-intro-body {
+      color: #EAF0F8;
+      font-size: 0.97rem;
+      line-height: 1.75;
+    }
+    .section-intro-body p + p { margin-top: 14px; }
+    .section-intro-body strong { color: var(--white); }
+
+    /* ─── MINI FEATURE CARDS ─── */
+    .mini-cards {
+      padding: 60px 40px 100px;
+      background: #050816; /* deep space */
+    }
+    .mini-cards .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .mini-card {
+      background: rgba(67,190,232,0.08);
+      border: 1px solid rgba(67,190,232,0.18);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .mini-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .mini-card-body {
+      font-size: 0.88rem;
+      color: #EAF0F8;
+      line-height: 1.65;
+    }
+
+    /* ─── STATS CARDS ─── */
+    .stats-section {
+      padding: 60px 40px;
+      background: #0A1228; /* deep tech */
+    }
+    .stats-section .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .stat-card {
+      background: #0F1729;
+      border: 1px solid rgba(0,229,255,0.18);
+      border-radius: 20px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 40px rgba(0,229,255,0.18), inset 0 1px 0 rgba(0,229,255,0.08);
+    }
+    .stat-card-label {
+      font-size: 0.78rem;
+      color: var(--purple-light);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .stat-card-value {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .stat-card-sub {
+      font-size: 0.8rem;
+      color: #EAF0F8;
+      margin-bottom: 20px;
+    }
+
+    /* Donut / ring chart */
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .donut {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--purple) 0% 24%,
+        var(--purple-light) 24% 45%,
+        rgba(15,27,46,0.12) 45% 100%
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .donut-inner {
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      background: #0F1729;
+    }
+
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .donut-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: #EAF0F8;
+    }
+    .legend-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* time split card */
+    .time-split {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .time-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .time-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: #EAF0F8;
+    }
+    .time-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+    .time-dot.purple { background: var(--purple); }
+    .time-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .time-bar-wrap {
+      background: rgba(15,27,46,0.08);
+      border-radius: 999px;
+      height: 4px;
+      overflow: hidden;
+    }
+    .time-bar {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--green);
+    }
+    .time-bar.purple { background: var(--purple); }
+
+    /* ─── FEATURE PAIR ─── */
+    .feature-pair {
+      padding: 80px 40px;
+      background: #050816; /* deep space */
+    }
+    .feature-pair .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .feature-card {
+      background: #0F1729;
+      border: 1px solid rgba(0,229,255,0.18);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 40px rgba(0,229,255,0.18), inset 0 1px 0 rgba(0,229,255,0.08);
+    }
+    .feature-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .feature-card-body {
+      font-size: 0.88rem;
+      color: #EAF0F8;
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    /* mini bar chart */
+    .mini-bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      height: 60px;
+      margin-top: 16px;
+    }
+    .mini-bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      background: rgba(67,190,232,0.35);
+    }
+    .mini-bar.purple { background: var(--purple); }
+    .mini-bar.green  { background: var(--green); opacity: 0.7; }
+
+    /* mini line chart */
+    .mini-line-chart {
+      margin-top: 16px;
+      height: 60px;
+      position: relative;
+    }
+    .mini-line-chart svg { width: 100%; height: 100%; }
+
+    /* mid-section CTA */
+    .mid-cta {
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    /* ─── SEPARATOR ─── */
+    .sep {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(67,190,232,0.3), transparent);
+      margin: 0 40px;
+    }
+
+    /* ─── THREE STEPS ─── */
+    .steps-section {
+      padding: 100px 40px;
+      background: #0A1228; /* deep tech */
+    }
+    .steps-header {
+      max-width: 700px;
+      margin-bottom: 60px;
+    }
+    .steps-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--purple-light);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+    .steps-headline {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .steps-sub {
+      font-size: 0.95rem;
+      color: #EAF0F8;
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 28px;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .step-card {
+      background: #0F1729;
+      border: 1px solid rgba(0,229,255,0.18);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 10px 28px rgba(0,229,255,0.14), inset 0 1px 0 rgba(0,229,255,0.06);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .step-card:hover { border-color: rgba(67,190,232,0.35); }
+
+    .step-number {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .step-num-big { font-size: 1.1rem; }
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .step-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .step-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: #EAF0F8;
+      line-height: 1.55;
+    }
+    .step-bullet::before {
+      content: '•';
+      color: var(--purple-light);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-result {
+      font-size: 0.88rem;
+      color: #EAF0F8;
+      line-height: 1.6;
+      padding-top: 14px;
+      border-top: 1px solid rgba(15,27,46,0.07);
+    }
+    .step-result strong { color: var(--white); }
+
+    /* ─── TWO PROFILES ─── */
+    .profiles-section {
+      padding: 100px 40px;
+      background: #050816; /* deep space */
+    }
+    .profiles-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+    .profiles-headline {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .profiles-sub {
+      font-size: 0.95rem;
+      color: #EAF0F8;
+      line-height: 1.7;
+    }
+
+    .profiles-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* White/light card */
+    .profile-card {
+      border-radius: 20px;
+      padding: 48px;
+    }
+    .profile-card.white {
+      background: #0F1729;
+      color: #EAF0F8;
+      border: 1px solid rgba(0,229,255,0.22);
+      box-shadow: 0 14px 40px rgba(0,229,255,0.18);
+    }
+    .profile-card.green-card {
+      background: #0F1729;
+      color: #EAF0F8;
+      border: 1px solid rgba(236,72,153,0.30);
+      box-shadow: 0 14px 40px rgba(236,72,153,0.18);
+    }
+
+    .profile-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      color: #EAF0F8;
+    }
+    .profile-body {
+      font-size: 0.95rem;
+      color: #EAF0F8;
+      line-height: 1.7;
+      max-width: 620px;
+      margin-bottom: 28px;
+    }
+    .profile-body strong { color: #EAF0F8; }
+
+    .profile-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(7,0,31,0.1);
+    }
+    .profile-col-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #EAF0F8;
+      margin-bottom: 14px;
+    }
+    .profile-col-icon {
+      width: 22px; height: 22px;
+      flex-shrink: 0;
+    }
+    .profile-col-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .profile-col-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #EAF0F8;
+      line-height: 1.55;
+    }
+    .profile-col-item::before {
+      content: '•';
+      color: var(--purple);
+      flex-shrink: 0;
+    }
+    .profile-col-item.green-dot::before { color: #02a060; }
+
+    .profile-card.green-card .profile-col-item::before { color: #02a060; }
+
+    .profile-result {
+      font-size: 0.88rem;
+      color: #EAF0F8;
+      line-height: 1.65;
+    }
+    .profile-result strong { color: #EAF0F8; }
+
+    .profile-card-cta {
+      margin-top: 36px;
+      text-align: center;
+    }
+    .profile-card-cta .trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: rgba(7,0,31,0.5);
+    }
+    .profile-card-cta .trust span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ─── MISSION ─── */
+    .mission-section {
+      padding: 100px 40px;
+      position: relative;
+      background: #0A1228; /* deep tech */
+    }
+    .mission-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .mission-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green);
+      color: #EAF0F8;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .mission-headline {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      margin-bottom: 24px;
+      max-width: 600px;
+    }
+    .mission-body {
+      font-size: 0.95rem;
+      color: #EAF0F8;
+      line-height: 1.8;
+      max-width: 680px;
+    }
+    .mission-body p + p { margin-top: 14px; }
+    .mission-body strong { color: var(--white); }
+    .mission-body em { font-style: italic; }
+
+    /* ─── BIG STATS ─── */
+    .big-stats {
+      padding: 80px 40px;
+      text-align: center;
+      background: #050816; /* deep space */
+    }
+    .big-stats-headline {
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .big-stats-sub {
+      font-size: 0.95rem;
+      color: #EAF0F8;
+      margin-bottom: 60px;
+    }
+
+    .big-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .big-stat {
+      background: #0F1729;
+      border: 1px solid rgba(0,229,255,0.18);
+      border-radius: 20px;
+      padding: 36px;
+      text-align: left;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 40px rgba(0,229,255,0.18), inset 0 1px 0 rgba(0,229,255,0.08);
+    }
+    .big-stat-value {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -2px;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .big-stat-value .percent { color: var(--green); }
+    .big-stat-desc {
+      font-size: 0.88rem;
+      color: #EAF0F8;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .testimonial-quote {
+      font-size: 0.88rem;
+      color: #EAF0F8;
+      line-height: 1.75;
+      font-style: italic;
+      border-left: 2px solid var(--purple);
+      padding-left: 16px;
+    }
+    .testimonial-author {
+      margin-top: 16px;
+      font-size: 0.82rem;
+    }
+    .testimonial-author strong { color: var(--white); font-style: normal; }
+    .testimonial-author span { color: var(--neutral); font-style: normal; }
+
+    /* ─── FINAL CTA ─── */
+    .final-cta {
+      padding: 120px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: #0A1228; /* deep tech */
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(67,190,232,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .final-cta-headline {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .final-cta-btn { position: relative; z-index: 1; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 60px 40px 40px;
+      border-top: 1px solid rgba(15,27,46,0.07);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: #EAF0F8;
+      line-height: 1.6;
+    }
+    .footer-col-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #EAF0F8;
+      margin-bottom: 16px;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      font-size: 0.88rem;
+      color: #EAF0F8;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-links a:focus-visible { outline: 2px solid var(--purple); border-radius: 2px; }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      border-top: 1px solid rgba(15,27,46,0.06);
+      font-size: 0.8rem;
+      color: #EAF0F8;
+    }
+
+    @keyframes navpulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* ─── Chrome logo float ─── */
+    .hero-chrome-logo {
+      width: 200px; height: 200px;
+      border-radius: 24px;
+      object-fit: cover;
+      margin: 0 auto 32px;
+      display: block;
+      border: 2px solid rgba(0,229,255,0.45);
+      filter:
+        contrast(1.10) saturate(1.15) brightness(1.12)
+        drop-shadow(0 0 28px rgba(0,229,255,0.65))
+        drop-shadow(0 0 64px rgba(0,229,255,0.35))
+        drop-shadow(0 12px 36px rgba(0,0,0,0.6));
+      animation: floatlogo 4s ease-in-out infinite;
+    }
+    @keyframes floatlogo {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+    /* ─── Mission badges brand blue ─── */
+    .mission-badge {
+      background: var(--blue);
+      color: #EAF0F8;
+    }
+
+    /* ─── Separator brand blue ─── */
+    .sep {
+      background: linear-gradient(90deg, transparent, rgba(67,190,232,0.3), transparent);
+    }
+
+    /* ─── Step card hover brand blue ─── */
+    .step-card:hover { border-color: rgba(67,190,232,0.35); }
+
+    /* ─── Big stat green → brand blue ─── */
+    .big-stat-value .percent { color: var(--blue); }
+
+    /* ─── Testimonial quote bar ─── */
+    .testimonial-quote { border-left-color: var(--blue); }
+
+    /* ─── Profile card buttons ─── */
+    .profile-col-item::before { color: var(--blue); }
+
+    /* ─── Footer border ─── */
+    footer { border-top-color: rgba(67,190,232,0.12); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 800px) {
+      .section-intro .container,
+      .mini-cards .container,
+      .stats-section .container,
+      .feature-pair .container,
+      .big-stats-grid,
+      .profile-columns,
+      .footer-top { grid-template-columns: 1fr; }
+      .nav-tag { display: none; }
+      .mockup-body { grid-template-columns: 1fr; }
+      .mockup-sidebar { display: none; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ NAV ══════════ -->
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-icon"><img src="hero-circuit.png" alt="Crew Automate.AI logo" /></div>
+      Crew Automate.AI
+    </div>
+
+    <div class="nav-tag">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block;animation:navpulse 2s ease infinite;flex-shrink:0;"></span>
+      AI Automation &nbsp;·&nbsp; <span>Freelancers &amp; Business Partners</span>
+    </div>
+
+    <div class="nav-menu">
+      <button class="nav-menu-btn" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu-dropdown" role="menu">
+        <a href="#" class="nav-menu-item" role="menuitem" data-scroll="bottom">Home</a>
+        <a href="products.html" class="nav-menu-item" role="menuitem">Products</a>
+        <a href="#" class="nav-menu-item" role="menuitem" data-scroll="bottom">Tutorial</a>
+        <a href="#" class="nav-menu-item" role="menuitem" data-scroll="bottom">About Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero">
+    <!-- Aurora Waves WebGL canvas — sits behind all hero content -->
+    <canvas id="aurora-canvas"></canvas>
+
+    <img src="hero-circuit.png" alt="Crew Automate.AI" class="hero-chrome-logo" />
+    <h1 class="hero-headline">Clarity for better decision-making</h1>
+    <p class="hero-sub">
+      Clearly define <strong>what you sell</strong>, what it costs you
+      (in time and expenses), and what it brings in.<br/>
+      <strong>Make better decisions</strong>, for yourself and for your customers.
+    </p>
+
+    <div class="hero-cta">
+      <a href="signup.html" class="btn btn-purple">Create a free account</a>
+      <div class="hero-trust">
+        <span>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor" style="color:#3dfd98"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+          14-day free trial
+        </span>
+        <span>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor" style="color:#3dfd98"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+          No bank card required
+        </span>
+      </div>
+    </div>
+
+    <!-- Trust signals -->
+    <div class="trust-bar">
+      <div class="trust-stars-row">
+        <div class="trust-stars">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.966a1 1 0 00.95.69h4.17c.969 0 1.371 1.24.588 1.81l-3.374 2.45a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.374-2.45a1 1 0 00-1.176 0l-3.373 2.45c-.784.57-1.839-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.393c-.783-.57-.38-1.81.588-1.81h4.17a1 1 0 00.95-.69l1.286-3.966z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.966a1 1 0 00.95.69h4.17c.969 0 1.371 1.24.588 1.81l-3.374 2.45a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.374-2.45a1 1 0 00-1.176 0l-3.373 2.45c-.784.57-1.839-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.393c-.783-.57-.38-1.81.588-1.81h4.17a1 1 0 00.95-.69l1.286-3.966z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.966a1 1 0 00.95.69h4.17c.969 0 1.371 1.24.588 1.81l-3.374 2.45a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.374-2.45a1 1 0 00-1.176 0l-3.373 2.45c-.784.57-1.839-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.393c-.783-.57-.38-1.81.588-1.81h4.17a1 1 0 00.95-.69l1.286-3.966z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.966a1 1 0 00.95.69h4.17c.969 0 1.371 1.24.588 1.81l-3.374 2.45a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.374-2.45a1 1 0 00-1.176 0l-3.373 2.45c-.784.57-1.839-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.393c-.783-.57-.38-1.81.588-1.81h4.17a1 1 0 00.95-.69l1.286-3.966z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.966a1 1 0 00.95.69h4.17c.969 0 1.371 1.24.588 1.81l-3.374 2.45a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.374-2.45a1 1 0 00-1.176 0l-3.373 2.45c-.784.57-1.839-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.393c-.783-.57-.38-1.81.588-1.81h4.17a1 1 0 00.95-.69l1.286-3.966z"/></svg>
+        </div>
+        <span class="trust-stars-text"><strong>4.9/5</strong> from 1,200+ reviews</span>
+        <span class="trust-divider"></span>
+        <span style="display:flex;align-items:center;gap:10px;">
+          <span class="trust-avatars">
+            <span class="trust-avatar-ph"></span>
+            <span class="trust-avatar-ph" style="background:linear-gradient(135deg,#5E8BF0,#2E6BE6);"></span>
+            <span class="trust-avatar-ph" style="background:linear-gradient(135deg,#2E6BE6,#1F4FB8);"></span>
+            <span class="trust-avatar-ph" style="background:linear-gradient(135deg,#7FA4F2,#5E8BF0);"></span>
+          </span>
+          Trusted by <strong style="color:var(--white);font-weight:700;">500+</strong> founders
+        </span>
+      </div>
+
+      <div class="trust-logos-label">As featured in</div>
+      <div class="trust-logos">
+        <span class="trust-logo"><span class="trust-logo-dot"></span>NorthPeak</span>
+        <span class="trust-logo alt"><span class="trust-logo-dot"></span>Lumen&amp;Co</span>
+        <span class="trust-logo alt2"><span class="trust-logo-dot"></span>Cascade</span>
+        <span class="trust-logo"><span class="trust-logo-dot"></span>Harbor.io</span>
+        <span class="trust-logo alt"><span class="trust-logo-dot"></span>Fieldstone</span>
+      </div>
+    </div>
+
+    <!-- Dashboard mockup -->
+    <div class="hero-mockup">
+      <div class="mockup-browser">
+        <div class="mockup-titlebar">
+          <div class="mockup-dot"></div>
+          <div class="mockup-dot"></div>
+          <div class="mockup-dot"></div>
+        </div>
+        <div class="mockup-body">
+          <!-- Sidebar -->
+          <div class="mockup-sidebar">
+            <div class="mockup-sidebar-logo">
+              <div class="mockup-sidebar-logo-icon"><img src="hero-circuit.png" alt="Crew Automate.AI" /></div>
+              <span>Crew Automate.AI</span>
+            </div>
+            <div class="mockup-nav-item active"><div class="mockup-nav-item-dot"></div>Dashboard</div>
+            <div class="mockup-nav-item"><div class="mockup-nav-item-dot"></div>My Offers</div>
+            <div class="mockup-nav-item"><div class="mockup-nav-item-dot"></div>Revenue Goals</div>
+            <div class="mockup-nav-item"><div class="mockup-nav-item-dot"></div>Expenses</div>
+            <div class="mockup-nav-item"><div class="mockup-nav-item-dot"></div>Cash Flow</div>
+            <div class="mockup-nav-item"><div class="mockup-nav-item-dot"></div>Live Tracking</div>
+          </div>
+
+          <!-- Content -->
+          <div class="mockup-content">
+            <div class="mockup-header-row">
+              <span class="mockup-title">Dashboard</span>
+              <span class="mockup-badge">March 2025</span>
+            </div>
+
+            <div class="mockup-stats-row">
+              <div class="mockup-stat-card">
+                <div class="mockup-stat-label">Revenue</div>
+                <div class="mockup-stat-value green">$12,580</div>
+                <div class="mockup-stat-sub">target $52,060</div>
+              </div>
+              <div class="mockup-stat-card">
+                <div class="mockup-stat-label">Actual Hourly Rate</div>
+                <div class="mockup-stat-value">$87/h</div>
+                <div class="mockup-stat-sub">target $95/h</div>
+              </div>
+              <div class="mockup-stat-card">
+                <div class="mockup-stat-label">Net Compensation</div>
+                <div class="mockup-stat-value">$3,840</div>
+                <div class="mockup-stat-sub">+12% vs forecast</div>
+              </div>
+            </div>
+
+            <div class="mockup-chart">
+              <div class="mockup-chart-label">Projected Cash Flow</div>
+              <div class="chart-bars">
+                <div class="chart-bar" style="height:40%"></div>
+                <div class="chart-bar" style="height:55%"></div>
+                <div class="chart-bar active" style="height:70%"></div>
+                <div class="chart-bar" style="height:60%"></div>
+                <div class="chart-bar" style="height:80%"></div>
+                <div class="chart-bar" style="height:65%"></div>
+                <div class="chart-bar" style="height:90%"></div>
+                <div class="chart-bar" style="height:75%"></div>
+                <div class="chart-bar active" style="height:95%"></div>
+                <div class="chart-bar" style="height:82%"></div>
+                <div class="chart-bar" style="height:88%"></div>
+                <div class="chart-bar active" style="height:100%"></div>
+              </div>
+            </div>
+
+            <div class="mockup-table">
+              <div class="mockup-table-row header">
+                <div>Offer</div><div class="val">Rate</div><div class="val">Hours</div><div class="val">Margin</div>
+              </div>
+              <div class="mockup-table-row">
+                <div class="name">Digital Strategy</div><div class="val">$1,800</div><div class="val">18h</div><div class="green-val">+34%</div>
+              </div>
+              <div class="mockup-table-row">
+                <div class="name">LinkedIn Training</div><div class="val">$650</div><div class="val">6h</div><div class="green-val">+22%</div>
+              </div>
+              <div class="mockup-table-row">
+                <div class="name">Monthly Coaching</div><div class="val">$480</div><div class="val">8h</div><div class="val" style="color:#ff6b6b">-5%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ INTRO ══════════ -->
+  <section class="section-intro">
+    <div class="container">
+      <div>
+        <h2 class="section-intro-headline">Make better decisions, so you can charge the right price.</h2>
+      </div>
+      <div class="section-intro-body">
+        <p>Crew Automate.AI helps you clarify your business model, making it profitable and sustainable.</p>
+        <p>No more guesswork on a wonky Excel spreadsheet: <strong>you see what's really paying off</strong> and what needs to change.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ MINI CARDS ══════════ -->
+  <section class="mini-cards">
+    <div class="container">
+      <div class="mini-card">
+        <div class="mini-card-title">A clear and structured revenue objective</div>
+        <div class="mini-card-body">Define your target revenue and align it with your services, your work capacity, and your financial goals — all in one coherent model.</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-title">An ally against burnout</div>
+        <div class="mini-card-body">Immediately understand the amount of work your current scenario requires so you can adjust if necessary — before you hit a wall.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ STATS CARDS ══════════ -->
+  <section class="stats-section">
+    <div class="container">
+
+      <!-- Revenue stat -->
+      <div class="stat-card">
+        <div class="stat-card-label">Revenue</div>
+        <div class="stat-card-value">$12,580</div>
+        <div class="stat-card-sub">target: $52,060</div>
+        <div class="donut-wrap">
+          <div class="donut"><div class="donut-inner"></div></div>
+          <div class="donut-legend">
+            <div class="donut-legend-item">
+              <div class="legend-dot" style="background:var(--purple)"></div>
+              Net Compensation
+            </div>
+            <div class="donut-legend-item">
+              <div class="legend-dot" style="background:var(--purple-light)"></div>
+              Social Contributions
+            </div>
+            <div class="donut-legend-item">
+              <div class="legend-dot" style="background:rgba(15,27,46,0.2)"></div>
+              Income Tax
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Time stat -->
+      <div class="stat-card">
+        <div class="stat-card-label">Work time</div>
+        <div class="time-split">
+          <div>
+            <div class="time-row" style="margin-bottom:6px;">
+              <div class="time-label"><div class="time-dot"></div>For my clients</div>
+              <div class="time-value">14h 30m</div>
+            </div>
+            <div class="time-bar-wrap"><div class="time-bar" style="width:70%"></div></div>
+          </div>
+          <div>
+            <div class="time-row" style="margin-bottom:6px;">
+              <div class="time-label"><div class="time-dot purple"></div>For my business</div>
+              <div class="time-value">6h 30m</div>
+            </div>
+            <div class="time-bar-wrap"><div class="time-bar purple" style="width:30%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FEATURE PAIR ══════════ -->
+  <section class="feature-pair">
+    <div class="container">
+      <div class="feature-card">
+        <div class="feature-card-title">Predictable compensation</div>
+        <div class="feature-card-body">Simulate your expenses, your salary, and anticipate the necessary margins to protect your finances month after month.</div>
+        <div class="mini-bar-chart">
+          <div class="mini-bar" style="height:35%"></div>
+          <div class="mini-bar purple" style="height:55%"></div>
+          <div class="mini-bar" style="height:42%"></div>
+          <div class="mini-bar purple" style="height:70%"></div>
+          <div class="mini-bar" style="height:50%"></div>
+          <div class="mini-bar purple" style="height:85%"></div>
+          <div class="mini-bar" style="height:60%"></div>
+          <div class="mini-bar purple" style="height:100%"></div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">Data-driven decisions</div>
+        <div class="feature-card-body">Visualize your cash flow, track your sales, and continuously adjust your choices based on real numbers — not gut feeling.</div>
+        <div class="mini-line-chart">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6e45ff" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#6e45ff" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 55 L20 45 L40 48 L60 35 L80 38 L100 28 L120 32 L140 20 L160 15 L180 10 L200 5 L200 60 L0 60 Z" fill="url(#lg1)"/>
+            <path d="M0 55 L20 45 L40 48 L60 35 L80 38 L100 28 L120 32 L140 20 L160 15 L180 10 L200 5" stroke="#6e45ff" stroke-width="2" fill="none"/>
+            <circle cx="140" cy="20" r="3" fill="#3dfd98"/>
+            <circle cx="200" cy="5" r="3" fill="#6e45ff"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- mid CTA -->
+  <div class="mid-cta">
+    <a href="signup.html" class="btn btn-purple">Create a free account</a>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- ══════════ THREE STEPS ══════════ -->
+  <section class="steps-section">
+    <div class="container">
+      <div class="steps-header">
+        <div class="steps-headline">A three-step approach, for clear-headed management</div>
+        <div class="steps-sub">Crew Automate.AI supports you in all dimensions of your business model, with a simple and scalable approach.</div>
+        <a href="signup.html" class="btn btn-purple">Create a free account</a>
+      </div>
+
+      <div class="steps-list">
+        <div class="step-card">
+          <div class="step-number"><span class="step-num-big">01.</span></div>
+          <div class="step-title">Structure your business</div>
+          <div class="step-bullets">
+            <div class="step-bullet">Add the products and services you sell or wish to sell.</div>
+            <div class="step-bullet">Set a price for each offer, anticipate the time you will spend using our suggestions, and set your monthly sales targets.</div>
+          </div>
+          <div class="step-result">Result: Get the <strong>actual hourly rate</strong> of each offer, compare the profitability of your different offers, and decide what you want to develop, improve, or stop.</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number"><span class="step-num-big">02.</span></div>
+          <div class="step-title">Simulate your costs and compensation</div>
+          <div class="step-bullets">
+            <div class="step-bullet">Set your target compensation (monthly or annual).</div>
+            <div class="step-bullet">Enter your professional expenses, charges and investments.</div>
+            <div class="step-bullet">Automatically obtain your break-even points.</div>
+          </div>
+          <div class="step-result">The result: a coherent budget, which shows whether your choices are viable or need to be adjusted.</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number"><span class="step-num-big">03.</span></div>
+          <div class="step-title">Follow reality and adjust your decisions</div>
+          <div class="step-bullets">
+            <div class="step-bullet">Record your sales, expenses and salaries received.</div>
+            <div class="step-bullet">Compare your forecasts with your actual activity.</div>
+            <div class="step-bullet">Adjust your model: pricing, offers, objectives, priorities.</div>
+          </div>
+          <div class="step-result">The result: a <strong>living strategy</strong>, driven by data, not intuition.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- ══════════ TWO PROFILES ══════════ -->
+  <section class="profiles-section">
+    <div class="container">
+      <div class="profiles-header">
+        <h2 class="profiles-headline">Two profiles, one same ambition: to structure their business in order to work better</h2>
+        <p class="profiles-sub">Crew Automate.AI addresses the specific needs of those seeking clarity to make better decisions.</p>
+      </div>
+
+      <div class="profiles-grid">
+
+        <!-- Card 1: Freelancers -->
+        <div class="profile-card white">
+          <h3 class="profile-title">Advanced independent professionals (freelancers and solopreneurs)</h3>
+          <p class="profile-body">
+            You already have a business up and running. You're selling, you're delivering, but you're struggling to know if your model is truly profitable, <strong>or if it's leading you straight to burnout</strong>.
+          </p>
+          <a href="#" class="btn btn-purple">That interests me</a>
+
+          <div class="profile-columns">
+            <div>
+              <div class="profile-col-title">
+                <svg class="profile-col-icon" viewBox="0 0 24 24" fill="none" stroke="#6e45ff" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                What Crew Automate.AI Provides
+              </div>
+              <div class="profile-col-list">
+                <div class="profile-col-item">A clear scenario based on your <strong>actual capacity</strong>.</div>
+                <div class="profile-col-item">A simulation of your margins, expenses, and target compensation.</div>
+                <div class="profile-col-item">A 6–12 month cash flow projection.</div>
+              </div>
+            </div>
+            <div>
+              <div class="profile-col-title">
+                <svg class="profile-col-icon" viewBox="0 0 24 24" fill="none" stroke="#6e45ff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+                Concrete Benefit
+              </div>
+              <p class="profile-result">You <strong>earn more without working more</strong>, and manage your business with confidence.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Business coaches -->
+        <div class="profile-card green-card">
+          <h3 class="profile-title">Business Coaches, Mentors &amp; Trainers</h3>
+          <p class="profile-body">
+            You support <strong>independent professionals</strong>, but you're looking for a <strong>structured framework</strong> to professionalize your method and amplify your impact.
+          </p>
+          <a href="#" class="btn btn-purple">That interests me</a>
+
+          <div class="profile-columns">
+            <div>
+              <div class="profile-col-title">
+                <svg class="profile-col-icon" viewBox="0 0 24 24" fill="none" stroke="#02a060" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                What Crew Automate.AI Provides
+              </div>
+              <div class="profile-col-list">
+                <div class="profile-col-item green-dot">A visual tool to co-build solid business models.</div>
+                <div class="profile-col-item green-dot">Data-driven tracking of progress (sales, margin, cash flow).</div>
+                <div class="profile-col-item green-dot">A strategic support to guide decisions and prioritize actions.</div>
+              </div>
+            </div>
+            <div>
+              <div class="profile-col-title">
+                <svg class="profile-col-icon" viewBox="0 0 24 24" fill="none" stroke="#02a060" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+                Concrete Benefit
+              </div>
+              <p class="profile-result">You deliver Premium, results-driven coaching with minimal mental overhead.</p>
+            </div>
+          </div>
+
+          <div class="profile-card-cta">
+            <a href="signup.html" class="btn btn-green">Create a free account</a>
+            <div class="trust">
+              <span>
+                <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor" style="color:#02a060"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+                14-day free trial
+              </span>
+              <span>
+                <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor" style="color:#02a060"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+                No credit card required
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ MISSION ══════════ -->
+  <section class="mission-section">
+    <div class="container">
+      <div class="mission-badges">
+        <div class="mission-badge">5 Years of Entrepreneurship</div>
+        <div class="mission-badge">100+ Independents Supported</div>
+        <div class="mission-badge">80% Client Retention</div>
+      </div>
+
+      <h2 class="mission-headline">On a Mission Against Freelancer Burnout</h2>
+
+      <div class="mission-body">
+        <p>Being self-employed is first and foremost a <strong>lifestyle choice</strong>. You leave employment to find space, organizational freedom, and more time for yourself.</p>
+        <p>Yet many freelancers quickly become overwhelmed — often far more than when they were employees.</p>
+        <p><strong>This is mainly because they underestimate:</strong></p>
+        <p>— the time each project actually takes,<br/>
+           — the time needed to grow and run their business,<br/>
+           — and the price they need to charge to stay profitable.</p>
+        <p>A freelancer who undercharges slowly but surely builds their own fragility — financial and mental.</p>
+        <p><strong>Crew Automate.AI</strong> was born from this reality — to help independents understand their <em>break-even point</em>.</p>
+        <p>To <strong>charge more, pay yourself better</strong>, and <strong>escape the 70-hour week</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ BIG STATS + TESTIMONIALS ══════════ -->
+  <section class="big-stats">
+    <div class="container">
+      <h2 class="big-stats-headline">Clearer decisions.<br/>Better-managed revenue.</h2>
+      <p class="big-stats-sub">Our users transform how they run their business — gaining time, clarity, and margin.</p>
+
+      <div class="big-stats-grid">
+        <div class="big-stat">
+          <div class="big-stat-value"><span class="percent">+50 %</span></div>
+          <div class="big-stat-desc">increase in profitability after 3 months of guided adjustments</div>
+          <div class="testimonial-quote">
+            "At a crucial moment when I was looking to pivot my business model, I had many questions and several decisions to make. I had been working alone for 2.5 years. I had a lot of work and needed help to take my business to the next level. Crew Automate.AI delivered on its promise: I doubled my rates, increased my profitability, have more clients than ever, and am no longer underwater."
+          </div>
+          <div class="testimonial-author"><strong>Marie-Hélène Tomasino</strong><br/><span>HR Consultant</span></div>
+        </div>
+
+        <div class="big-stat">
+          <div class="big-stat-value">1h</div>
+          <div class="big-stat-desc">to build a realistic revenue and compensation scenario</div>
+          <div class="testimonial-quote">
+            "I removed certain services, re-evaluated my prices, and above all, I gained incredible clarity on the exact sales volumes I needed to hit my growth targets."
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FINAL CTA ══════════ -->
+  <section class="final-cta">
+    <div class="container">
+      <h2 class="final-cta-headline">Clearer decisions.<br/>Better-managed revenue.</h2>
+      <div class="final-cta-btn">
+        <a href="signup.html" class="btn btn-green">Create a free account</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">
+            <div class="nav-logo-icon"><img src="hero-circuit.png" alt="Crew Automate.AI logo" /></div>
+            Crew Automate.AI
+          </div>
+          <div class="footer-tagline">Clarity for better decision-making.<br/>The tool for freelancers &amp; their business partners.</div>
+        </div>
+        <div>
+          <div class="footer-col-title">Product</div>
+          <div class="footer-links">
+            <a href="#">Features</a>
+            <a href="#">Rates</a>
+            <a href="#">Roadmap</a>
+            <a href="#">Changelog</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+            <a href="#">Legal Notice</a>
+            <a href="#">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2025 Crew Automate.AI. All rights reserved.</span>
+        <span>Made with ♥ for freelancers</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════ AURORA WAVES WebGL ══════════ -->
+  <script>
+  (function() {
+    const canvas = document.getElementById('aurora-canvas');
+    if (!canvas) return;
+
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return;
+
+    // ── Vertex shader ──────────────────────────────────────────
+    const vertSrc = `
+      attribute vec2 position;
+      void main() {
+        gl_Position = vec4(position, 0.0, 1.0);
+      }
+    `;
+
+    // ── Fragment shader — Aurora Waves (exact port from React component) ──
+    const fragSrc = `
+      #ifdef GL_ES
+      precision mediump float;
+      #endif
+
+      uniform vec2  uResolution;
+      uniform float uTime;
+      uniform float uSpeed;
+      uniform float uGlow;
+      uniform float uTheme;
+
+      vec3 palette(float t) {
+        return mix(
+          vec3(0.1, 0.2, 0.5),
+          vec3(0.8, 0.4, 0.9),
+          0.5 + 0.5 * sin(t)
+        );
+      }
+
+      float wave(vec2 uv, float freq, float phase) {
+        return 0.4 * sin(uv.x * freq + uTime * uSpeed + phase);
+      }
+
+      float glow(float d, float strength) {
+        return exp(-d * d * strength);
+      }
+
+      void main() {
+        vec2 uv = (gl_FragCoord.xy / uResolution.xy) * 2.0 - 1.0;
+        uv.x *= uResolution.x / uResolution.y;
+
+        float y = uv.y;
+
+        float w1 = wave(uv, 3.0, 0.0);
+        float w2 = wave(uv, 5.0, 1.0);
+        float w3 = wave(uv, 7.0, 2.5);
+
+        float waveLine = w1 + w2 * 0.6 + w3 * 0.4;
+        float dist = abs(y - waveLine);
+        float g = glow(dist, uGlow);
+
+        vec3 col = palette(waveLine + y);
+
+        vec3 bg = mix(vec3(0.02, 0.02, 0.05), vec3(1.0), uTheme);
+        col = mix(bg, col, g * 1.5);
+
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `;
+
+    // ── Compile helpers ────────────────────────────────────────
+    function compile(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      return s;
+    }
+
+    const prog = gl.createProgram();
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER,   vertSrc));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+
+    // ── Full-screen triangle (covers clip space with 1 triangle) ──
+    const verts = new Float32Array([-1,-1, 3,-1, -1,3]);
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
+
+    const posLoc = gl.getAttribLocation(prog, 'position');
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    // ── Uniform locations ──────────────────────────────────────
+    const uTime       = gl.getUniformLocation(prog, 'uTime');
+    const uResolution = gl.getUniformLocation(prog, 'uResolution');
+    const uSpeed      = gl.getUniformLocation(prog, 'uSpeed');
+    const uGlow       = gl.getUniformLocation(prog, 'uGlow');
+    const uTheme      = gl.getUniformLocation(prog, 'uTheme');
+
+    // Aurora params matched to React component defaults
+    gl.uniform1f(uSpeed, 1.0);
+    gl.uniform1f(uGlow,  15.0);
+    gl.uniform1f(uTheme, 0.0);
+
+    // ── Resize ─────────────────────────────────────────────────
+    function resize() {
+      const hero = canvas.parentElement;
+      const w = hero.clientWidth;
+      const h = hero.clientHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width  = w * dpr;
+      canvas.height = h * dpr;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.uniform2f(uResolution, canvas.width, canvas.height);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    // ── Render loop ────────────────────────────────────────────
+    const start = performance.now();
+    let raf;
+
+    function loop() {
+      gl.uniform1f(uTime, (performance.now() - start) / 1000);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      raf = requestAnimationFrame(loop);
+    }
+
+    loop();
+
+    // Pause when tab hidden (performance)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        loop();
+      }
+    });
+  })();
+
+  // Nav dropdown menu — toggle + scroll-to-bottom for each item
+  (function() {
+    const menu = document.querySelector('.nav-menu');
+    if (!menu) return;
+    const btn = menu.querySelector('.nav-menu-btn');
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', e => {
+      if (!menu.contains(e.target)) {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+    menu.querySelectorAll('[data-scroll="bottom"]').forEach(item => {
+      item.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>
