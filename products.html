@@ -235,8 +235,8 @@
       display: none;
     }
 
-    /* Push all direct hero children above the canvas */
-    .hero > *:not(#aurora-canvas) {
+    /* Push all direct hero children above the canvas and the globe */
+    .hero > *:not(#aurora-canvas):not(.tech-globe) {
       position: relative;
       z-index: 1;
     }
