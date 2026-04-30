@@ -222,11 +222,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-      background-color: #050816;
-      background-image: url('hero-circuit.png');
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
+      background: #050816; /* dark deep space */
     }
 
     /* Aurora canvas — disabled in bright theme to keep hero clean */
@@ -240,46 +236,43 @@
       z-index: 1;
     }
 
-    /* 3D glass sphere behind ALL hero content */
+    /* Circuit-board sphere — image clipped into a circle */
     .hero::before {
       content: '';
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 1200px;
-      height: 1200px;
+      width: 1100px;
+      height: 1100px;
       border-radius: 50%;
-      background:
-        radial-gradient(circle at 32% 26%,
-          rgba(255,255,255,0.95) 0%,
-          #DCEEFB 10%,
-          #A7CDF0 28%,
-          #5E94D9 52%,
-          #2E6BE6 72%,
-          #1F3F86 92%,
-          #0F1F48 100%);
+      background-color: #050816;
+      background-image: url('hero-circuit.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       box-shadow:
-        inset -60px -80px 160px rgba(15,31,72,0.55),
-        inset 50px 60px 100px rgba(255,255,255,0.35),
-        0 80px 140px -20px rgba(46,107,230,0.45),
-        0 40px 80px rgba(15,27,46,0.25);
+        inset 0 0 120px rgba(0,0,0,0.6),
+        0 60px 120px rgba(46,107,230,0.30),
+        0 0 90px rgba(0,229,255,0.30);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* specular highlight on the sphere */
+    /* favorable cyan hue wash + soft top-left highlight on the sphere */
     .hero::after {
       content: '';
       position: absolute;
-      top: calc(50% - 280px);
-      left: calc(50% - 300px);
-      width: 260px;
-      height: 130px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1100px;
+      height: 1100px;
       border-radius: 50%;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.25) 45%, transparent 75%);
-      transform: rotate(-20deg);
-      filter: blur(10px);
+      background:
+        radial-gradient(circle at 32% 28%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 30%, transparent 55%),
+        radial-gradient(circle at 50% 50%, rgba(0,229,255,0.10) 0%, rgba(46,107,230,0.06) 50%, transparent 75%);
+      mix-blend-mode: screen;
       pointer-events: none;
       z-index: 0;
     }
