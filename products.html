@@ -235,14 +235,15 @@
       display: none;
     }
 
-    /* Push all direct hero children above the canvas and the globe */
-    .hero > *:not(#aurora-canvas):not(.tech-globe) {
+    /* Push all direct hero children above the canvas */
+    .hero > *:not(#aurora-canvas) {
       position: relative;
       z-index: 1;
     }
 
     /* ─── CIRCUIT GLOBE IMAGE (with brand cyan hue overlay) ─── */
-    .tech-globe {
+    .hero::before {
+      content: '';
       position: absolute;
       top: 50%;
       left: 50%;
@@ -260,16 +261,21 @@
       background-blend-mode: screen, normal;
       filter: drop-shadow(0 60px 100px rgba(46,107,230,0.45)) drop-shadow(0 0 60px rgba(0,229,255,0.35)) saturate(1.05);
     }
-    .tech-globe::after {
+    .hero::after {
       /* favorable cyan hue wash + soft top-left highlight */
       content: '';
       position: absolute;
-      inset: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1200px;
+      height: 1200px;
       background:
         radial-gradient(circle at 32% 28%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 30%, transparent 55%),
         radial-gradient(circle at 50% 50%, rgba(0,229,255,0.10) 0%, rgba(46,107,230,0.06) 50%, transparent 75%);
       mix-blend-mode: screen;
       pointer-events: none;
+      z-index: 0;
     }
 
     .hero-headline {
@@ -1342,9 +1348,6 @@
   <section class="hero">
     <!-- Aurora Waves WebGL canvas — sits behind all hero content -->
     <canvas id="aurora-canvas"></canvas>
-
-    <!-- Blue glass sphere — sits behind all hero content -->
-    <div class="tech-globe" aria-hidden="true"></div>
 
     <img src="logo-chrome.jpeg" alt="ClarkAIBots" class="hero-chrome-logo" />
     <h1 class="hero-headline">Your Business Doesn't Sleep. Neither Should Your Operations.</h1>
